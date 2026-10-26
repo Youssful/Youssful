@@ -1,109 +1,47 @@
-<!-- ╔══════════════════════════════════════════════════════════════╗ -->
-<!-- ║                                                              ║ -->
-<!-- ║                    ★  YOUSSFUL  ★                            ║ -->
-<!-- ║          AI Engineer · Java · Python · Rust                  ║ -->
-<!-- ║                                                              ║ -->
-<!-- ╚══════════════════════════════════════════════════════════════╝ -->
-
 <div align="center">
 
-<!-- Readmint-rendered profile card: switches between light and dark automatically -->
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="readmint/card-dark.svg">
-  <img alt="Youssful's GitHub Profile Card" src="readmint/card.svg" width="840">
+  <img alt="GitHub Overview" src="readmint/card.svg" width="840">
 </picture>
 
 </div>
 
 ---
 
-<div align="center">
+### Overview
 
-```
- ██╗   ██╗ ██████╗ ██╗   ██╗███████╗███████╗███████╗██╗   ██╗██╗
- ╚██╗ ██╔╝██╔═══██╗██║   ██║██╔════╝██╔════╝██╔════╝██║   ██║██║
-  ╚████╔╝ ██║   ██║██║   ██║███████╗███████╗█████╗  ██║   ██║██║
-   ╚██╔╝  ██║   ██║██║   ██║╚════██║╚════██║██╔══╝  ██║   ██║██║
-    ██║   ╚██████╔╝╚██████╔╝███████║███████║██║     ╚██████╔╝███████╗
-    ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝╚══════╝╚═╝      ╚═════╝ ╚══════╝
-```
-
-**AI Engineer** crafting intelligent systems & developer tools
-
-[![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://github.com/Youssful)
-[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://github.com/Youssful)
-[![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)](https://github.com/Youssful)
-
-</div>
+Software engineer specializing in AI/ML services, systems programming, and high-performance server tooling. Primary focus on scalable backends and infrastructure using **Java**, **TypeScript**, **Python**, and **Rust**.
 
 ---
 
-### 🧠 About Me
+### Tech Stack
 
-> Building at the intersection of **AI/ML** and **systems programming** — from Minecraft server plugins to scalable backend services and machine learning pipelines.
-
-- 🔭 Currently working on **AI-powered developer tools** & open-source plugins
-- 🌱 Deep-diving into **LLM orchestration**, **Rust systems programming** & **distributed systems**
-- ⚡ Background in **Minecraft plugin development** — shipped tools used across live servers
-- 🤝 Open to collaborating on **AI tooling**, **backend infrastructure** & **open-source projects**
-
----
-
-### 🛠️ Tech Stack
-
-<div align="center">
-
-| Domain | Technologies |
-|--------|-------------|
-| **Languages** | Java · Python · Rust · TypeScript · SQL |
-| **AI / ML** | PyTorch · LangChain · Transformers · OpenAI API |
-| **Backend** | Spring Boot · FastAPI · gRPC · REST |
-| **Infra** | Docker · Kubernetes · GitHub Actions · Gradle |
-| **Data** | PostgreSQL · Redis · Kafka · MongoDB |
-| **Minecraft** | Paper API · Spigot · BungeeCord · Velocity |
-
-</div>
+| Category | Technologies |
+|:---|:---|
+| **Core Languages** | Java, TypeScript, Python, Rust, SQL |
+| **Machine Learning & AI** | PyTorch, ONNX Runtime, Hugging Face Transformers, LLM Tooling |
+| **Backend & Systems** | Spring Boot, FastAPI, gRPC, Tokio, Node.js |
+| **Data & Infrastructure** | PostgreSQL, Redis, Docker, GitHub Actions, Gradle |
+| **Server Platforms** | Paper / Purpur API, Spigot, Fabric, BungeeCord, Velocity |
 
 ---
 
-### 📌 Featured Projects
+### Selected Projects
 
-<div align="center">
-
-<a href="https://github.com/Youssful/MiniGame">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=Youssful&repo=MiniGame&theme=tokyonight&hide_border=true&border_radius=8" />
-</a>
-<a href="https://github.com/Youssful/DialogMenus">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=Youssful&repo=DialogMenus&theme=tokyonight&hide_border=true&border_radius=8" />
-</a>
-
-<a href="https://github.com/Youssful/LagDetector">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=Youssful&repo=LagDetector&theme=tokyonight&hide_border=true&border_radius=8" />
-</a>
-<a href="https://github.com/Youssful/SeedProtector">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=Youssful&repo=SeedProtector&theme=tokyonight&hide_border=true&border_radius=8" />
-</a>
-
-</div>
-
----
-
-### 📊 Activity
-
-<div align="center">
-
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=Youssful&theme=tokyo-night&hide_border=true&area=true&radius=8" width="95%" alt="Activity Graph" />
-
-</div>
+| Project | Stack | Description | Status |
+|:---|:---|:---|:---:|
+| **[ferris-forge](https://github.com/Youssful/ferris-forge)** | TypeScript | Developer tooling and workspace orchestration platform. | Private |
+| **[SeedProtector](https://github.com/Youssful/SeedProtector)** | Java, Paper API | Lightweight Paper plugin that obfuscates structure and feature seeds to mitigate world seed cracking. | Public |
+| **[ContainerDumper](https://github.com/Youssful/ContainerDumper)** | Java, Fabric | Client-side Fabric mod for Minecraft to export container and inventory states to JSON. | Public |
+| **[laya-multilingual-onnx](https://github.com/Youssful/laya-multilingual-onnx)** | Python, ONNX | Exported multilingual ONNX model and tokenizer for real-time text processing and chat moderation. | Public |
+| **[DialogMenus](https://github.com/Youssful/DialogMenus)** | Java, Bukkit | Dynamic, event-driven menu framework for Minecraft servers. | Private |
+| **[MiniGame](https://github.com/Youssful/MiniGame)** | Java, Spigot | Modular arena and game engine implementation for multi-arena server gameplay. | Private |
 
 ---
 
 <div align="center">
 
-<sub>⚡ Profile card rendered by <a href="https://github.com/MrLarkyy/Readmint">Readmint</a> — auto-updated daily via GitHub Actions</sub>
-
-<br/>
-
-![Profile Views](https://komarev.com/ghpvc/?username=Youssful&style=flat-square&color=blueviolet)
+<sub>GitHub: <a href="https://github.com/Youssful">@Youssful</a></sub>
 
 </div>

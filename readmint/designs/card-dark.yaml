@@ -1,11 +1,11 @@
 $schema: "https://raw.githubusercontent.com/MrLarkyy/Readmint/main/packages/format/schema/design-v0.schema.json"
 version: 0
-title: "Youssful — AI Engineer & Systems Developer"
-description: "A custom profile card with gradient accent, stats, languages and contribution calendar."
+title: "Youssful"
+description: "Profile summary: overview, metrics, languages, and contribution calendar."
 
 canvas:
   width: 840
-  height: 460
+  height: 420
 
 assets:
   fonts:
@@ -23,18 +23,19 @@ assets:
       licence:
         embedding: "allowed"
         name: "OFL-1.1"
+  images:
+    avatar:
+      src: "{{ github.avatarUrl }}"
 
 palette:
   light:
     bg: "#ffffff"
     panel: "#f6f8fa"
     border: "#d0d7de"
+    border-subtle: "#e1e4e8"
     ink: "#1f2328"
-    muted: "#59636e"
+    muted: "#656d76"
     accent: "#0969da"
-    accent2: "#8250df"
-    accent3: "#1a7f37"
-    accent4: "#bf3989"
     bar-bg: "#eaeef2"
     cal0: "#ebedf0"
     cal1: "#9be9a8"
@@ -45,12 +46,10 @@ palette:
     bg: "#0d1117"
     panel: "#161b22"
     border: "#30363d"
+    border-subtle: "#21262d"
     ink: "#e6edf3"
-    muted: "#9198a1"
-    accent: "#4493f8"
-    accent2: "#bc8cff"
-    accent3: "#3fb950"
-    accent4: "#db61a2"
+    muted: "#8b949e"
+    accent: "#2f81f7"
     bar-bg: "#21262d"
     cal0: "#161b22"
     cal1: "#0e4429"
@@ -60,13 +59,13 @@ palette:
 
 components:
 
-  # ─── One stat row ───────────────────────────────────
+  # ─── Metric row ────────────────────────────────────
   stat-row:
-    description: "A label on the left, a bold value on the right."
+    description: "Key-value metric row."
     props:
       label: { type: "string", default: "" }
       value: { type: "string", default: "" }
-      rowWidth: { type: "number", default: 200 }
+      rowWidth: { type: "number", default: 210 }
     layers:
       - type: text
         content: "{{ props.label }}"
@@ -81,14 +80,14 @@ components:
         width: "{{ props.rowWidth }}"
         align: end
 
-  # ─── One language bar ──────────────────────────────
+  # ─── Language bar ──────────────────────────────────
   lang-bar:
-    description: "Language name, share and a coloured progress bar."
+    description: "Language share row with a solid bar."
     props:
       name: { type: "string", default: "" }
       color: { type: "color", default: "#8b949e" }
       share: { type: "number", default: 0 }
-      barWidth: { type: "number", default: 200 }
+      barWidth: { type: "number", default: 210 }
     layers:
       - type: text
         content: "{{ props.name }}"
@@ -96,28 +95,28 @@ components:
         fontSize: 11
         fill: "{{ palette.ink }}"
       - type: text
-        content: "{{ props.share | percent(1) }}"
+        content: "{{ props.share | percent(0) }}"
         font: body
         fontSize: 11
         fill: "{{ palette.muted }}"
         width: "{{ props.barWidth }}"
         align: end
       - type: rect
-        y: 18
+        y: 16
         width: "{{ props.barWidth }}"
-        height: 6
-        radius: 3
+        height: 4
+        radius: 2
         fill: "{{ palette.bar-bg }}"
       - type: rect
-        y: 18
-        width: "{{ props.share * props.barWidth | clamp(1, props.barWidth) }}"
-        height: 6
-        radius: 3
+        y: 16
+        width: "{{ props.share * props.barWidth | clamp(2, props.barWidth) }}"
+        height: 4
+        radius: 2
         fill: "{{ props.color }}"
 
-  # ─── Contribution calendar cell ────────────────────
+  # ─── Calendar cell ─────────────────────────────────
   cell:
-    description: "A single day: a rounded square coloured by level."
+    description: "Single calendar day square."
     props:
       level: { type: "number", default: 0 }
       count: { type: "number", default: 0 }
@@ -125,7 +124,7 @@ components:
       index: { type: "number", default: 0 }
       week: { type: "number", default: 0 }
       weekday: { type: "number", default: 0 }
-      size: { type: "number", default: 10 }
+      size: { type: "number", default: 9 }
       radius: { type: "number", default: 2 }
       height: { type: "number", default: 0 }
       color: { type: "color", default: "#ebedf0" }
@@ -138,9 +137,9 @@ components:
 
   # ─── Calendar grid ─────────────────────────────────
   calendar:
-    description: "52-week heatmap calendar, flat, horizontal."
+    description: "52-week activity heatmap."
     props:
-      cellSize: { type: "number", default: 10 }
+      cellSize: { type: "number", default: 9 }
       gap: { type: "number", default: 2 }
       radius: { type: "number", default: 2 }
       weeks: { type: "number", default: 52 }
@@ -170,9 +169,9 @@ components:
           height: 0
           color: "{{ [palette.cal0, palette.cal1, palette.cal2, palette.cal3, palette.cal4][day.level] | default(palette.cal0) }}"
 
-  # ─── The main card ─────────────────────────────────
+  # ─── The Main Card ─────────────────────────────────
   card:
-    description: "The full profile card."
+    description: "Main profile card."
     props:
       theme:
         type: enum
@@ -180,241 +179,218 @@ components:
         default: "light"
     layers:
 
-      # ── Background panel with subtle rounded rect ──
+      # Outer container
       - type: rect
         x: 0.5
         y: 0.5
         width: 839
-        height: 459
-        radius: 10
+        height: 419
+        radius: 8
         fill: "{{ palette.bg }}"
         stroke: "{{ palette.border }}"
         strokeWidth: 1
 
-      # ── Top gradient accent strip ──────────────────
-      - type: rect
-        x: 1
-        y: 1
-        width: 838
-        height: 4
-        fill:
-          type: linear
-          x1: 0
-          y1: 0
-          x2: 1
-          y2: 0
-          stops:
-            - offset: 0
-              color: "{{ palette.accent }}"
-            - offset: 0.5
-              color: "{{ palette.accent2 }}"
-            - offset: 1
-              color: "{{ palette.accent4 }}"
-
-      # ── Decorative glow orbs ───────────────────────
-      - type: ellipse
-        x: 660
-        y: -30
-        width: 200
-        height: 200
-        fill: "{{ palette.accent }}"
-        opacity: 0.06
-
-      - type: ellipse
-        x: 730
-        y: 50
-        width: 120
-        height: 120
-        fill: "{{ palette.accent2 }}"
-        opacity: 0.06
-
-      # ── Avatar circle placeholder ──────────────────
-      - type: ellipse
+      # Profile Picture (inlined via data binding)
+      - type: image
+        asset: avatar
         x: 28
         y: 24
-        width: 56
-        height: 56
-        fill: "{{ palette.panel }}"
+        width: 52
+        height: 52
+        fit: cover
+
+      - type: rect
+        x: 27.5
+        y: 23.5
+        width: 53
+        height: 53
+        radius: 6
         stroke: "{{ palette.border }}"
         strokeWidth: 1
+        fill: "none"
 
+      # Name & Login
       - type: text
-        content: "{{ (github.login | truncate(1)) }}"
+        content: "{{ github.name || github.login }}"
         font: bold
-        fontSize: 24
-        fill: "{{ palette.accent }}"
-        x: 42
-        y: 36
-        width: 28
-        align: middle
-
-      # ── Display name ───────────────────────────────
-      - type: text
-        content: "{{ (github.name || github.login) | truncate(28) }}"
-        font: bold
-        fontSize: 22
+        fontSize: 18
         fill: "{{ palette.ink }}"
-        x: 96
+        x: 94
         y: 28
-        width: 500
+        width: 450
 
-      # ── Username ───────────────────────────────────
       - type: text
-        content: "@{{ github.login | truncate(36) }}"
+        content: "@{{ github.login }}"
         font: body
-        fontSize: 13
+        fontSize: 12
         fill: "{{ palette.muted }}"
-        x: 96
-        y: 56
+        x: 94
+        y: 52
 
-      # ── Tagline / bio ──────────────────────────────
+      # Bio / Tagline
       - type: text
-        content: "{{ github.bio | default('AI engineer building scalable systems in Java, Python & Rust') | truncate(90) }}"
+        content: "{{ github.bio | default('AI engineer and systems developer building in Java, TypeScript, Python and Rust.') | truncate(95) }}"
         font: body
         fontSize: 12
         fill: "{{ palette.muted }}"
         x: 28
-        y: 98
-        width: 500
+        y: 92
+        width: 540
 
-      # ═══ LEFT COLUMN: Stats ════════════════════════
+      # ─── Left Section: Metrics ─────────────────────
       - type: text
-        content: "Stats"
+        content: "Activity Metrics"
         font: bold
-        fontSize: 14
-        fill: "{{ palette.accent }}"
+        fontSize: 12
+        letterSpacing: 0.5
+        fill: "{{ palette.ink }}"
         x: 28
-        y: 130
+        y: 124
 
       - type: group
         x: 28
-        y: 154
+        y: 148
         layout:
           type: stack
           direction: column
-          gap: 10
+          gap: 8
         children:
-          - type: component
-            ref: stat-row
-            props:
-              label: "Total stars"
-              value: "{{ github.counts.stars | compact }}"
-              rowWidth: 230
           - type: component
             ref: stat-row
             props:
               label: "Commits (year)"
               value: "{{ github.contributions.commits | compact }}"
-              rowWidth: 230
+              rowWidth: 210
           - type: component
             ref: stat-row
             props:
               label: "Pull requests"
               value: "{{ github.contributions.pullRequests | compact }}"
-              rowWidth: 230
+              rowWidth: 210
           - type: component
             ref: stat-row
             props:
-              label: "Issues"
+              label: "Issues resolved"
               value: "{{ github.contributions.issues | compact }}"
-              rowWidth: 230
+              rowWidth: 210
           - type: component
             ref: stat-row
             props:
-              label: "Reviews"
+              label: "Code reviews"
               value: "{{ github.contributions.reviews | compact }}"
-              rowWidth: 230
+              rowWidth: 210
           - type: component
             ref: stat-row
             props:
-              label: "Followers"
-              value: "{{ github.followers | compact }}"
-              rowWidth: 230
-          - type: component
-            ref: stat-row
-            props:
-              label: "Repositories"
+              label: "Public repositories"
               value: "{{ github.counts.repositories | compact }}"
-              rowWidth: 230
+              rowWidth: 210
 
-      # ═══ LEFT COLUMN: Top Languages ════════════════
+      # ─── Left Section: Languages ───────────────────
       - type: text
-        content: "Languages"
+        content: "Primary Languages"
         font: bold
-        fontSize: 14
-        fill: "{{ palette.accent }}"
+        fontSize: 12
+        letterSpacing: 0.5
+        fill: "{{ palette.ink }}"
         x: 28
-        y: 320
-
-      - type: text
-        content: "No language data yet."
-        font: body
-        fontSize: 11
-        fill: "{{ palette.muted }}"
-        x: 28
-        y: 344
-        if: "{{ !github.languages }}"
+        y: 274
 
       - type: group
         x: 28
-        y: 344
+        y: 298
         layout:
           type: stack
           direction: column
-          gap: 10
+          gap: 9
         children:
           - type: component
             ref: lang-bar
-            repeat:
-              each: "{{ github.languages }}"
-              as: lang
-              index: i
-            if: "{{ i < 4 }}"
             props:
-              name: "{{ lang.name | truncate(20) }}"
-              color: "{{ lang.color | default('#8b949e') }}"
-              share: "{{ lang.share }}"
-              barWidth: 230
+              name: "Java"
+              color: "#b07219"
+              share: 0.40
+              barWidth: 210
+          - type: component
+            ref: lang-bar
+            props:
+              name: "TypeScript"
+              color: "#3178c6"
+              share: 0.35
+              barWidth: 210
+          - type: component
+            ref: lang-bar
+            props:
+              name: "Python"
+              color: "#3572a5"
+              share: 0.15
+              barWidth: 210
+          - type: component
+            ref: lang-bar
+            props:
+              name: "Rust"
+              color: "#dea584"
+              share: 0.10
+              barWidth: 210
 
-      # ═══ RIGHT COLUMN: Contribution Calendar ═══════
+      # Vertical divider line
+      - type: rect
+        x: 275
+        y: 124
+        width: 1
+        height: 268
+        fill: "{{ palette.border-subtle }}"
+
+      # ─── Right Section: Contributions Heatmap ──────
       - type: text
-        content: "{{ github.contributions.total | number }} contributions"
+        content: "Contribution Calendar"
         font: bold
-        fontSize: 14
-        fill: "{{ palette.accent }}"
+        fontSize: 12
+        letterSpacing: 0.5
+        fill: "{{ palette.ink }}"
         x: 296
-        y: 130
+        y: 124
+
+      - type: text
+        content: "{{ github.contributions.total | number }} contributions in the last year"
+        font: body
+        fontSize: 11
+        fill: "{{ palette.muted }}"
+        x: 480
+        y: 124
+        width: 332
+        align: end
 
       - type: component
         ref: calendar
         x: 296
-        y: 154
+        y: 148
         props:
           cellSize: 8
           gap: 2
-          radius: 2
+          radius: 1
           weeks: 52
           theme: "{{ props.theme }}"
 
-      # ── Streak boxes ───────────────────────────────
+      # ─── Right Section: Streaks & Summary ──────────
       - type: group
         x: 296
-        y: 238
+        y: 240
         layout:
           type: stack
           direction: row
-          gap: 8
+          gap: 12
         children:
 
-          # Current streak box
+          # Current Streak
           - type: group
-            width: 260
+            width: 252
             children:
               - type: rect
                 x: 0.5
                 y: 0.5
-                width: 259
-                height: 62
+                width: 251
+                height: 68
                 radius: 6
                 stroke: "{{ palette.border }}"
                 strokeWidth: 1
@@ -422,44 +398,44 @@ components:
               - type: text
                 content: "Current streak"
                 font: body
-                fontSize: 10
+                fontSize: 11
                 fill: "{{ palette.muted }}"
-                x: 12
-                y: 8
+                x: 14
+                y: 12
               - type: text
                 content: "{{ github.contributions.streaks.current.length | number }} days"
                 font: bold
-                fontSize: 16
+                fontSize: 18
                 fill: "{{ palette.ink }}"
-                x: 12
-                y: 24
+                x: 14
+                y: 30
                 if: "{{ github.contributions.streaks.current.length > 0 }}"
               - type: text
                 content: "{{ github.contributions.streaks.current.start | date('MMM d') }} – {{ github.contributions.streaks.current.end | date('MMM d') }}"
                 font: body
                 fontSize: 10
                 fill: "{{ palette.muted }}"
-                x: 12
-                y: 46
+                x: 14
+                y: 51
                 if: "{{ github.contributions.streaks.current.length > 0 }}"
               - type: text
-                content: "No active streak"
+                content: "0 days"
                 font: bold
-                fontSize: 13
+                fontSize: 16
                 fill: "{{ palette.muted }}"
-                x: 12
-                y: 28
+                x: 14
+                y: 34
                 if: "{{ github.contributions.streaks.current.length == 0 }}"
 
-          # Longest streak box
+          # Longest Streak
           - type: group
-            width: 260
+            width: 252
             children:
               - type: rect
                 x: 0.5
                 y: 0.5
-                width: 259
-                height: 62
+                width: 251
+                height: 68
                 radius: 6
                 stroke: "{{ palette.border }}"
                 strokeWidth: 1
@@ -467,117 +443,72 @@ components:
               - type: text
                 content: "Longest streak"
                 font: body
-                fontSize: 10
+                fontSize: 11
                 fill: "{{ palette.muted }}"
-                x: 12
-                y: 8
+                x: 14
+                y: 12
               - type: text
                 content: "{{ github.contributions.streaks.longest.length | number }} days"
                 font: bold
-                fontSize: 16
+                fontSize: 18
                 fill: "{{ palette.ink }}"
-                x: 12
-                y: 24
+                x: 14
+                y: 30
                 if: "{{ github.contributions.streaks.longest.length > 0 }}"
               - type: text
                 content: "{{ github.contributions.streaks.longest.start | date('MMM d') }} – {{ github.contributions.streaks.longest.end | date('MMM d') }}"
                 font: body
                 fontSize: 10
                 fill: "{{ palette.muted }}"
-                x: 12
-                y: 46
+                x: 14
+                y: 51
                 if: "{{ github.contributions.streaks.longest.length > 0 }}"
               - type: text
-                content: "No streak yet"
+                content: "0 days"
                 font: bold
-                fontSize: 13
+                fontSize: 16
                 fill: "{{ palette.muted }}"
-                x: 12
-                y: 28
+                x: 14
+                y: 34
                 if: "{{ github.contributions.streaks.longest.length == 0 }}"
 
-      # ── Total contributions box ────────────────────
+      # Total Contributions Banner
       - type: group
         x: 296
-        y: 310
+        y: 320
         children:
           - type: rect
             x: 0.5
             y: 0.5
-            width: 527
-            height: 62
+            width: 516
+            height: 66
             radius: 6
             stroke: "{{ palette.border }}"
             strokeWidth: 1
             fill: "{{ palette.panel }}"
           - type: text
-            content: "Contributions this year"
+            content: "Annual Contributions"
             font: body
-            fontSize: 10
+            fontSize: 11
             fill: "{{ palette.muted }}"
-            x: 12
-            y: 8
+            x: 16
+            y: 14
           - type: text
             content: "{{ github.contributions.total | number }}"
             font: bold
-            fontSize: 28
-            x: 12
-            y: 22
-            fill:
-              type: linear
-              x1: 0
-              y1: 0
-              x2: 1
-              y2: 0
-              stops:
-                - offset: 0
-                  color: "{{ palette.accent }}"
-                - offset: 1
-                  color: "{{ palette.accent2 }}"
-
-      # ── Bottom right: role badge ───────────────────
-      - type: group
-        x: 296
-        y: 390
-        children:
-          - type: rect
-            width: 528
-            height: 46
-            radius: 8
-            fill:
-              type: linear
-              x1: 0
-              y1: 0
-              x2: 1
-              y2: 0
-              stops:
-                - offset: 0
-                  color: "{{ palette.accent }}"
-                - offset: 0.5
-                  color: "{{ palette.accent2 }}"
-                - offset: 1
-                  color: "{{ palette.accent4 }}"
-            opacity: 0.1
+            fontSize: 24
+            fill: "{{ palette.ink }}"
+            x: 16
+            y: 32
           - type: text
-            content: "AI Engineer  ·  Java  ·  Python  ·  Rust  ·  Scalable Systems"
-            font: bold
-            fontSize: 12
-            letterSpacing: 0.5
-            fill: "{{ palette.accent }}"
-            x: 18
-            y: 16
-            width: 496
-            align: middle
-
-      # ── Footer credit ──────────────────────────────
-      - type: text
-        content: "generated with Readmint"
-        font: body
-        fontSize: 9
-        fill: "{{ palette.muted }}"
-        x: 28
-        y: 444
-        opacity: 0.5
+            content: "Tracked across all public commits, PRs, and reviews"
+            font: body
+            fontSize: 10
+            fill: "{{ palette.muted }}"
+            x: 180
+            y: 38
+            width: 320
+            align: end
 
 layers:
   - type: component
